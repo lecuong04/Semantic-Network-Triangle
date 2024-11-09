@@ -95,4 +95,9 @@ window.addEventListener("DOMContentLoaded", () => {
 			input.value = 0;
 		});
 	});
+	document.addEventListener('contextmenu', e => {
+		if (e.target.tagName.toLowerCase() != "input") {
+			e.preventDefault();
+		}
+	});
 });
