@@ -1,4 +1,5 @@
 pub mod triangle {
+    use serde::*;
     use std::{collections::HashSet, f64};
 
     pub const N_COLS: usize = 26;
@@ -1239,6 +1240,50 @@ pub mod triangle {
             return result;
         }
 
+        pub fn ToJson(&self) -> String {
+            #[derive(Serialize)]
+            struct View {
+                sA: f64,
+                sB: f64,
+                sC: f64,
+                cA: f64,
+                cB: f64,
+                cC: f64,
+                S: f64,
+                hA: f64,
+                hB: f64,
+                hC: f64,
+                P: f64,
+                pR: f64,
+                iR: f64,
+                data: [[i8; N_COLS]; N_ROWS],
+                root: Vec<usize>,
+                isError: bool,
+                history: Vec<[usize; 2]>,
+            }
+
+            return serde_json::to_string(&View {
+                sA: self.A,
+                sB: self.B,
+                sC: self.C,
+                cA: self.a,
+                cB: self.b,
+                cC: self.c,
+                S: self.S,
+                hA: self.hA,
+                hB: self.hB,
+                hC: self.hC,
+                P: self.P,
+                pR: self.R,
+                iR: self.r,
+                data: self.data,
+                root: self.root.clone(),
+                isError: self.isError,
+                history: self.history.clone(),
+            })
+            .unwrap();
+        }
+
         pub fn DebugMatrix(&self) {
             for row in 0..N_ROWS {
                 for col in 0..N_COLS {
@@ -1278,8 +1323,11 @@ fn test_triangle() {
     use crate::Triangle;
 
     let mut t = Triangle::New();
+    t.Set_a(3.0);
+    t.Set_b(4.0);
+    t.Set_c(5.0);
     t.Calculate();
     t.DebugValues();
-    t.DebugHistory();
-    println!("Error: {}", t.IsError());
+    t.Calculate();
+    println!("{}", t.ToJson());
 }

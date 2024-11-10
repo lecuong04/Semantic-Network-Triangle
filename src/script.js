@@ -14,6 +14,23 @@ let hC;
 let P;
 let pR;
 let iR;
+function update(out) {
+	root.innerHTML = out.html;
+	cA.value = out.cA;
+	cB.value = out.cB;
+	cC.value = out.cC;
+	sA.value = out.sA;
+	sB.value = out.sB;
+	sC.value = out.sC;
+	S.value = out.S;
+	hA.value = out.hA;
+	hB.value = out.hB;
+	hC.value = out.hC;
+	P.value = out.P;
+	pR.value = out.pR;
+	iR.value = out.iR;
+	MathJax.typeset();
+}
 async function submit_triangle() {
 	let out = JSON.parse(
 		await invoke("submit_triangle", {
@@ -32,39 +49,11 @@ async function submit_triangle() {
 			ir: parseFloat(iR.value),
 		})
 	);
-	root.innerHTML = out.html;
-	cA.value = out.cA;
-	cB.value = out.cB;
-	cC.value = out.cC;
-	sA.value = out.sA;
-	sB.value = out.sB;
-	sC.value = out.sC;
-	S.value = out.S;
-	hA.value = out.hA;
-	hB.value = out.hB;
-	hC.value = out.hC;
-	P.value = out.P;
-	pR.value = out.pR;
-	iR.value = out.iR;
-	MathJax.typeset();
+	update(out);
 }
 async function new_triangle() {
 	let out = JSON.parse(await invoke("new_triangle", {}));
-	root.innerHTML = out.html;
-	cA.value = out.cA;
-	cB.value = out.cB;
-	cC.value = out.cC;
-	sA.value = out.sA;
-	sB.value = out.sB;
-	sC.value = out.sC;
-	S.value = out.S;
-	hA.value = out.hA;
-	hB.value = out.hB;
-	hC.value = out.hC;
-	P.value = out.P;
-	pR.value = out.pR;
-	iR.value = out.iR;
-	MathJax.typeset();
+	update(out);
 }
 window.addEventListener("DOMContentLoaded", () => {
 	cA = document.getElementById("cA");
@@ -91,8 +80,7 @@ window.addEventListener("DOMContentLoaded", () => {
 	});
 	document.querySelectorAll("button.reset").forEach((button) => {
 		button.addEventListener("click", () => {
-			const input = button.parentNode.parentNode.children[0].children[0];
-			input.value = 0;
+			button.parentNode.parentNode.children[0].children[0].value = 0;
 		});
 	});
 	document.addEventListener('contextmenu', e => {
