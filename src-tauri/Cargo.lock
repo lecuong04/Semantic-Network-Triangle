@@ -2963,7 +2963,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "semantic-network"
+name = "semantic-network-triangle"
 version = "1.0.0"
 dependencies = [
  "serde",

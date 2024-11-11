@@ -1,5 +1,5 @@
 [package]
-name = "semantic-network"
+name = "semantic-network-triangle"
 version = "1.0.0"
 description = "Mạng ngữ nghĩa giải bài toán tam giác"
 authors = ["Lê Ngọc Cường", "lecuong04@outlook.com"]
